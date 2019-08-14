@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProsp= (state) => {
     return {
-      cartItems:state
+      cartItems:state.cartItems
     }
 }
 const mapDispatchToProps = (dispatch) => {
