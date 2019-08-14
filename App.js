@@ -10,22 +10,23 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import ShopingCart from './ShopingCart';
 import { Provider } from 'react-redux';
-import store from './store';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+///persist redux
+import { PersistGate } from 'redux-persist/integration/react'
+// import store from './store';
+import persist from './store';
 
-type Props = {};
+
+let persistStore = persist();
+
 export default class App extends Component<Props> {
   render() {
     return (
-      <Provider store={store}>
-        <ShopingCart/>
-      </Provider>
+      <PersistGate loading={<Text>Loading</Text>} persistor={persistStore.persistor}>
+        <Provider store={persistStore.store}>
+          <ShopingCart/>
+        </Provider>
+      </PersistGate>
     );
   }
 }
